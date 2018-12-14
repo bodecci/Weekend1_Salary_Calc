@@ -25,4 +25,9 @@ function getInput() {
     let inputsGet = new Employee($('#firstNameIn').val(), $('#lastNameIn').val(), 
                     $('#idIn').val(), $('#titleIn').val(), $('#salary').val());
     employees.push(inputsGet);
+    $('#firstNameIn').val(''); 
+    $('#lastNameIn').val('');
+    $('#idIn').val('');
+    $('#titleIn').val('');
+    $('#salary').val('');
 }
