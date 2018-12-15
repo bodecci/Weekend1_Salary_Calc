@@ -11,8 +11,6 @@ class Employee {
 
 let employees = [];
 
-console.log('JS loaded');
-
 $(document).ready(function(){
     console.log('JQ loaded');
 
@@ -20,6 +18,7 @@ $(document).ready(function(){
     
 });
 
+//gets user inputs, clears the field and displays the inputs into the table
 function getInput() {
     //get inputs
     let inputsGet = new Employee($('#firstNameIn').val(), $('#lastNameIn').val(), 
@@ -30,4 +29,28 @@ function getInput() {
     $('#idIn').val('');
     $('#titleIn').val('');
     $('#salary').val('');
+    //call tableDisplay function
+    tableDisplay();
 }
+
+function tableDisplay(){
+    
+    for(employee of employees){
+    let display = `<tr>
+                        <td>${employee.first}</td>
+                        <td>${employee.last}</td>
+                        <td>${employee.id}</td>
+                        <td>${employee.title}</td>
+                        <td>${employee.salary}</td>
+                        <td><button class="btn btn-danger" 
+                        id="${employee.id}">Delete</button></td>
+                    </tr>`;
+
+    $('#tableDisplay').html(display);
+    $(`#${employee.id}`).on('click', function (){
+        employees.splice(employees.indexOf(employee), 1);
+
+        $(this).parent().parent().remove();
+    });
+    }//end for of loop
+}//end of tableDisplay
