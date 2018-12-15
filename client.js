@@ -66,9 +66,13 @@ function monthlyTotal(){
     }
     monthTotal = (totalSalary/12).toFixed(2);
     //$('#displayMonthly').empty();
-    $('#displayMonthly').html(`<h2 id="displayMonthly">Monthly Total:$${monthTotal} </h2>`)
-
-    if(monthTotal > budget){
-
+    if(monthTotal <= budget){
+        $('#displayMonthly').html(`<h2 id="displayMonthly">
+                            Monthly Total:$${monthTotal} </h2>`);
     }
-}//end monthlyTotal
+    else{
+        $('#displayMonthly').html(`<h2 id="displayMonthly">
+                            Monthly Total:$${monthTotal} </h2>`);
+        $('#displayMonthly').css('color', 'red');
+    }
+} //end monthlyTotal 
