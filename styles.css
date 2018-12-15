@@ -2,3 +2,7 @@ body {
     background-color: #eeeeee;
     font-family: courier;
 }
+
+#displayMonthly {
+    text-align: right;
+}

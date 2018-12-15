@@ -10,6 +10,8 @@ class Employee {
 }// end of Employee class
 
 let employees = [];
+let monthTotal = 0;
+const budget = 20000;
 
 $(document).ready(function(){
     console.log('JQ loaded');
@@ -31,6 +33,8 @@ function getInput() {
     $('#salary').val('');
     //call tableDisplay function
     tableDisplay();
+    monthlyTotal();
+
 }
 
 function tableDisplay(){
@@ -54,3 +58,17 @@ function tableDisplay(){
     });
     }//end for of loop
 }//end of tableDisplay
+
+function monthlyTotal(){
+    let totalSalary = 0;
+    for(people of employees){
+      totalSalary += (parseInt(people.salary));
+    }
+    monthTotal = (totalSalary/12).toFixed(2);
+    //$('#displayMonthly').empty();
+    $('#displayMonthly').html(`<h2 id="displayMonthly">Monthly Total:$${monthTotal} </h2>`)
+
+    if(monthTotal > budget){
+
+    }
+}//end monthlyTotal
