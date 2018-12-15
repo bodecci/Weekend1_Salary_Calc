@@ -21,9 +21,9 @@ $(document).ready(function(){
 //gets user inputs, clears the field and displays the inputs into the table
 function getInput() {
     //get inputs
-    let inputsGet = new Employee($('#firstNameIn').val(), $('#lastNameIn').val(), 
+    let inputGet = new Employee($('#firstNameIn').val(), $('#lastNameIn').val(), 
                     $('#idIn').val(), $('#titleIn').val(), $('#salary').val());
-    employees.push(inputsGet);
+    employees.push(inputGet);
     $('#firstNameIn').val(''); 
     $('#lastNameIn').val('');
     $('#idIn').val('');
@@ -34,7 +34,7 @@ function getInput() {
 }
 
 function tableDisplay(){
-    
+    $('#tableDisplay').empty();
     for(employee of employees){
     let display = `<tr>
                         <td>${employee.first}</td>
@@ -46,7 +46,7 @@ function tableDisplay(){
                         id="${employee.id}">Delete</button></td>
                     </tr>`;
 
-    $('#tableDisplay').html(display);
+    $('#tableDisplay').append(display);
     $(`#${employee.id}`).on('click', function (){
         employees.splice(employees.indexOf(employee), 1);
 
