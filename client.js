@@ -6,27 +6,27 @@ class Employee {
         this.id = idIn;
         this.title = titleIn;
         this.salary = salaryIn;
-    }//end constructor
-}// end of Employee class
+    } //end constructor
+} // end of Employee class
 
 let employees = [];
 let monthTotal = 0;
 const budget = 20000;
 
-$(document).ready(function(){
+$(document).ready(function () {
     console.log('JQ loaded');
 
     $('#submit').on('click', getInput);
-    
+
 });
 
-//gets user inputs, clears the field and displays the inputs into the table
+//gets user inputs, create new Employee class and pushes into the array
 function getInput() {
     //get inputs
-    let inputGet = new Employee($('#firstNameIn').val(), $('#lastNameIn').val(), 
-                    $('#idIn').val(), $('#titleIn').val(), $('#salary').val());
+    let inputGet = new Employee($('#firstNameIn').val(), $('#lastNameIn').val(),
+        $('#idIn').val(), $('#titleIn').val(), $('#salary').val());
     employees.push(inputGet);
-    $('#firstNameIn').val(''); 
+    $('#firstNameIn').val('');
     $('#lastNameIn').val('');
     $('#idIn').val('');
     $('#titleIn').val('');
@@ -37,10 +37,11 @@ function getInput() {
 
 }
 
-function tableDisplay(){
+// displays the the Employee info in the table
+function tableDisplay() {
     $('#tableDisplay').empty();
-    for(employee of employees){
-    let display = `<tr>
+    for (employee of employees) {
+        let display = `<tr>
                         <td>${employee.first}</td>
                         <td>${employee.last}</td>
                         <td>${employee.id}</td>
@@ -50,29 +51,40 @@ function tableDisplay(){
                         id="${employee.id}">Delete</button></td>
                     </tr>`;
 
-    $('#tableDisplay').append(display);
-    $(`#${employee.id}`).on('click', function (){
-        employees.splice(employees.indexOf(employee), 1);
+        $('#tableDisplay').append(display);
+        $(`#${employee.id}`).on('click', function () {
+            employees.splice(employees.indexOf(employee), 1);
+            $(`${employee.salary}`).text(0);
+            $(this).parent().parent().remove();
 
-        $(this).parent().parent().remove();
-    });
-    }//end for of loop
-}//end of tableDisplay
+            monthlyTotal();
+            displayMonthlyText();
+        });
+    } //end for of loop
+} //end of tableDisplay
 
-function monthlyTotal(){
+//tracks the monthly total salary and displays it
+function monthlyTotal() {
     let totalSalary = 0;
-    for(people of employees){
-      totalSalary += (parseInt(people.salary));
+    for (people of employees) {
+        totalSalary += (parseInt(people.salary));
     }
-    monthTotal = (totalSalary/12).toFixed(2);
+    monthTotal = (totalSalary / 12).toFixed(2);
     //$('#displayMonthly').empty();
-    if(monthTotal <= budget){
-        $('#displayMonthly').html(`<h2 id="displayMonthly">
-                            Monthly Total:$${monthTotal} </h2>`);
-    }
-    else{
-        $('#displayMonthly').html(`<h2 id="displayMonthly">
-                            Monthly Total:$${monthTotal} </h2>`);
+    $('#displayMonthly').html(`<h2 id="displayMonthly">
+                    Monthly Total:$${monthTotal} </h2>`);
+    displayMonthlyText();
+} //end monthlyTotal 
+
+//displays the monthly total as red when it exceeds the budget
+function displayMonthlyText() {
+    if (monthTotal <= budget) {
+        $('#displayMonthly').html(`<h3 id="displayMonthly">
+                            Monthly Total:$${monthTotal} </h3>`);
+        $('#displayMonthly').css('color', 'black');
+    } else {
+        $('#displayMonthly').html(`<h3 id="displayMonthly">
+                            Monthly Total:$${monthTotal} </h3>`);
         $('#displayMonthly').css('color', 'red');
     }
-} //end monthlyTotal 
+} //end displayMonthlyText
