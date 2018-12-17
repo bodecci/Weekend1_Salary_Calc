@@ -25,15 +25,20 @@ function getInput() {
     //get inputs
     let inputGet = new Employee($('#firstNameIn').val(), $('#lastNameIn').val(),
         $('#idIn').val(), $('#titleIn').val(), $('#salary').val());
-    employees.push(inputGet);
-    $('#firstNameIn').val('');
-    $('#lastNameIn').val('');
-    $('#idIn').val('');
-    $('#titleIn').val('');
-    $('#salary').val('');
-    //call tableDisplay function
-    tableDisplay();
-    monthlyTotal();
+    if ($('#firstNameIn').val() == '' || $('#lastNameIn').val() == '' ||
+        $('#idIn').val() == '' || $('#titleIn').val() == '' || $('#salary').val() == '') {
+        alert("ALL FIELDS MUST BE FILLED!!!");
+    } else {
+        employees.push(inputGet);
+        $('#firstNameIn').val('');
+        $('#lastNameIn').val('');
+        $('#idIn').val('');
+        $('#titleIn').val('');
+        $('#salary').val('');
+        //call tableDisplay function
+        tableDisplay();
+        monthlyTotal();
+    }
 
 }
 
